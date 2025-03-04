@@ -1,6 +1,7 @@
 package com.example.SpringBoot3.controllers;
 
 import com.example.SpringBoot3.dto.LoginDTO;
+import com.example.SpringBoot3.dto.MailDTO;
 import com.example.SpringBoot3.dto.MessageDTO;
 import com.example.SpringBoot3.dto.AuthUserDTO;
 import com.example.SpringBoot3.services.AuthenticationService;
@@ -31,6 +32,11 @@ public class UserController {
         return authenticationService.login(user);
     }
 
-
+    //UC11 --> For sending mail to another person
+    @PostMapping(path = "/sendMail")
+    public String sendMail(@RequestBody MailDTO message){
+        emailService.sendEmail(message.getTo(), message.getSubject(), message.getBody());
+        return "Mail sent";
+    }
 
 }
