@@ -43,6 +43,7 @@ public class GreetingController {
         //UC3
         @GetMapping("/query")
         public String query(@PathParam("firstName") String firstName, @PathParam("lastName") String lastName){
+
             if(firstName != null && lastName != null)
                 return "Hello "+firstName+" "+lastName+" Welcome to Bridgelabz";
             else if(firstName != null)
