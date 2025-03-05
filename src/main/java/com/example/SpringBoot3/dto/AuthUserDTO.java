@@ -1,11 +1,21 @@
 package com.example.SpringBoot3.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 public class AuthUserDTO {
 
 
     String firstName;
     String lastName;
+
+    @Email(message = "User email not correct")
+    @NotBlank(message = "email required")
     String email;
+
+    @NotBlank(message = "password required")
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$", message = "invalid password")
     String password;
 
 

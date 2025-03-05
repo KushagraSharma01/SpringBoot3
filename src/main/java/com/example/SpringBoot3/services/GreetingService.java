@@ -2,15 +2,15 @@ package com.example.SpringBoot3.services;
 
 import com.example.SpringBoot3.dto.MessageDTO;
 import com.example.SpringBoot3.entities.MessageEntity;
+import com.example.SpringBoot3.interfaces.IGreetingInterface;
 import com.example.SpringBoot3.repositories.GreetingRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class GreetingService {
+public class GreetingService implements IGreetingInterface {
 
     String message;
     GreetingRepository greetingRepository;
