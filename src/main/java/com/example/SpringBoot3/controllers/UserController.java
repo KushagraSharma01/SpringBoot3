@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     
     EmailService emailService;
-//    IAuthenticatio iAuthInterface;
 
     @Autowired
     IAuthInterface iAuthInterface;
