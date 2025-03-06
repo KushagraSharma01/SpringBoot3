@@ -5,6 +5,7 @@ import com.example.SpringBoot3.interfaces.IAuthInterface;
 //import com.example.SpringBoot3.services.iAuthInterface;
 import com.example.SpringBoot3.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -38,8 +39,10 @@ public class UserController {
 
 
     //UC13 --> Added forgot password functionality
-    @PutMapping("/forgotpassword/{email}")
-    public AuthUserDTO forgotpassword(@RequestBody PassDTO pass, @PathVariable String email){
-        return iAuthInterface.forgotpassword(pass, email);
+    @PutMapping("/forgotPassword/{email}")
+    public AuthUserDTO forgotPassword(@RequestBody PassDTO pass, @PathVariable String email){
+        return iAuthInterface.forgotPassword(pass, email);
     }
+
+
 }
