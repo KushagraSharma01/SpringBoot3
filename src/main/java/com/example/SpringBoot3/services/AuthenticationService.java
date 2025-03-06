@@ -2,6 +2,7 @@ package com.example.SpringBoot3.services;
 
 import com.example.SpringBoot3.dto.AuthUserDTO;
 import com.example.SpringBoot3.dto.LoginDTO;
+import com.example.SpringBoot3.dto.PassDTO;
 import com.example.SpringBoot3.interfaces.IAuthInterface;
 import com.example.SpringBoot3.models.AuthUser;
 import com.example.SpringBoot3.repositories.UserRepository;
@@ -76,6 +77,26 @@ public class AuthenticationService implements IAuthInterface {
         userRepository.save(foundUser);
 
         return "user logged in"+"\ntoken : "+token;
+    }
+
+    public AuthUserDTO forgotpassword(PassDTO pass){
+
+        AuthUser foundUser = userRepository.findByEmail(pass.getEmail());
+
+        if(foundUser == null)
+            throw new RuntimeException("user not registered!");
+
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String hashpass = bCryptPasswordEncoder.encode(pass.getNewPassword());
+
+        foundUser.setPassword(pass.getNewPassword());
+        foundUser.setHashPass(hashpass);
+
+        userRepository.save(foundUser);
+
+        AuthUserDTO resDto = new AuthUserDTO(foundUser.getFirstName(), foundUser.getLastName(), foundUser.getEmail(), foundUser.getPassword(), foundUser.getId() );
+
+        return resDto;
     }
 
 
