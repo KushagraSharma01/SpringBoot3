@@ -13,5 +13,7 @@ public interface IAuthInterface {
 
     public String login(LoginDTO user);
 
-    public AuthUserDTO forgotpassword(PassDTO pass, String email);
+    public AuthUserDTO forgotPassword(PassDTO pass, String email);
+
+
 }

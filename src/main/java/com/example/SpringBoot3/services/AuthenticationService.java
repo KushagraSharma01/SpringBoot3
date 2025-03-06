@@ -79,7 +79,7 @@ public class AuthenticationService implements IAuthInterface {
         return "user logged in"+"\ntoken : "+token;
     }
 
-    public AuthUserDTO forgotpassword(PassDTO pass, String email){
+    public AuthUserDTO forgotPassword(PassDTO pass, String email){
 
         AuthUser foundUser = userRepository.findByEmail(email);
 
