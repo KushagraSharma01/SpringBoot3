@@ -79,20 +79,22 @@ public class AuthenticationService implements IAuthInterface {
         return "user logged in"+"\ntoken : "+token;
     }
 
-    public AuthUserDTO forgotpassword(PassDTO pass){
+    public AuthUserDTO forgotpassword(PassDTO pass, String email){
 
-        AuthUser foundUser = userRepository.findByEmail(pass.getEmail());
+        AuthUser foundUser = userRepository.findByEmail(email);
 
         if(foundUser == null)
             throw new RuntimeException("user not registered!");
 
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        String hashpass = bCryptPasswordEncoder.encode(pass.getNewPassword());
+        String hashpass = bCryptPasswordEncoder.encode(pass.getPassword());
 
-        foundUser.setPassword(pass.getNewPassword());
+        foundUser.setPassword(pass.getPassword());
         foundUser.setHashPass(hashpass);
 
         userRepository.save(foundUser);
+
+        emailService.sendEmail(email, "Password Reset Status", "Your password has been reset");
 
         AuthUserDTO resDto = new AuthUserDTO(foundUser.getFirstName(), foundUser.getLastName(), foundUser.getEmail(), foundUser.getPassword(), foundUser.getId() );
 
