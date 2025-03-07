@@ -4,6 +4,8 @@ import com.example.SpringBoot3.dto.MessageDTO;
 import com.example.SpringBoot3.entities.MessageEntity;
 import com.example.SpringBoot3.interfaces.IGreetingInterface;
 import com.example.SpringBoot3.repositories.GreetingRepository;
+import com.example.SpringBoot3.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,9 @@ public class GreetingService implements IGreetingInterface {
     String message;
     GreetingRepository greetingRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     public GreetingService(GreetingRepository greetingRepository) {
         this.greetingRepository = greetingRepository;
         message = "Hello World!";
@@ -22,6 +27,7 @@ public class GreetingService implements IGreetingInterface {
 
 
     public String getGreetings(){
+
         return this.message;
     }
 
